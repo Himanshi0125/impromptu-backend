@@ -6,7 +6,10 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'https://impromptu-practice2.vercel.app', // allow only your frontend
+  methods: ['GET', 'POST', 'OPTIONS'], // optional
+}));
 app.use(express.json());
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
