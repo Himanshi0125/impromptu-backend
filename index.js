@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { createServer } from '@vendia/serverless-express';
 
 dotenv.config();
 
@@ -89,4 +90,8 @@ app.post('/api/topic', async (req, res) => {
 });
 
 const PORT = 5050;
-app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(5050, () => console.log('Backend running on port 5050'));
+}
+
+export default createServer(app);
